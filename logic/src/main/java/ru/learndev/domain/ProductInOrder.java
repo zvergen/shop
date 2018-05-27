@@ -3,7 +3,6 @@ package ru.learndev.domain;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class ProductInOrder {
 
     @Id
