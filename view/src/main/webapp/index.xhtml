@@ -1,49 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>SHOP</h:head>
 <h:body>
     <h:form>
-        <table>
-            <tr>
-                <td><h:inputText value="#{orderBean.name}"/></td>
-                <td><h:inputText value="#{orderBean.price}"/></td>
-            </tr>
-            <tr>
-                <td>Product name</td>
-                <td>Product price</td>
-            </tr>
-            <tr>
-                <td>
-                    <h:commandButton value="Create product" action="#{orderBean.createProduct}"/>
-                </td>
-                <td>
-                    <h:commandButton value="Create order" action="#{orderBean.createOrder}"/>
-                </td>
-            </tr>
-        </table>
-        <h1>CREATED PRODUCTS</h1>
-        <h:dataTable value="#{orderBean.products}" var="product">
-            <h:column>
-                <h:outputText value="#{product.name}" />
-            </h:column>
-            <h:column>
-                <h:outputText value="#{product.price}" />
-            </h:column>
-            <h:column>
-                <h:commandButton value="Add" action="#{orderBean.addProduct(product)}" />
-            </h:column>
-        </h:dataTable>
+        <p:panel header="Create product">
+            <p:panelGrid columns="2">
+                <p:column>
+                    Product Name
+                </p:column>
+                <p:column>
+                    Product price
+                </p:column>
+                <p:column>
+                    <p:inputText value="#{orderBean.name}"/>
+                </p:column>
+                <p:column>
+                    <p:inputText value="#{orderBean.price}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Create product" action="#{orderBean.createProduct}" update="createProducts"/>
+                </p:column>
+                <p:column></p:column>
+            </p:panelGrid>
+            <p:commandButton value="Create order" action="#{orderBean.createOrder}"/>
+        </p:panel>
+        <p:panel header="CREATED PRODUCTS" id="createProducts">
+            <p:dataTable value="#{orderBean.products}" var="product">
+                <p:column>
+                    <h:outputText value="#{product.name}" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{product.price}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Add" action="#{orderBean.addProduct(product)}" update="addadProducts"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
     </h:form>
-    <h1>ADDED PRODUCTS</h1>
-    <h:dataTable value="#{orderBean.productsInOrder}" var="products">
-        <h:column>
-            <h:outputText value="#{products.name}" />
-        </h:column>
-        <h:column>
-            <h:outputText value="#{products.price}" />
-        </h:column>
-    </h:dataTable>
+    <p:panel header="ADDED PRODUCTS" id="addadProducts">
+        <p:dataTable value="#{orderBean.productsInOrder}" var="products">
+            <p:column>
+                <h:outputText value="#{products.name}" />
+            </p:column>
+            <p:column>
+                <h:outputText value="#{products.price}" />
+            </p:column>
+        </p:dataTable>
+    </p:panel>
 </h:body>
 </html>
