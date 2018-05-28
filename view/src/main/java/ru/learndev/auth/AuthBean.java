@@ -1,6 +1,7 @@
 package ru.learndev.auth;
 
 import org.apache.commons.lang3.StringUtils;
+import ru.learndev.auth.domain.User;
 import ru.learndev.auth.ejb.AuthenticationManagerBean;
 
 import javax.ejb.EJB;
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @SessionScoped
 public class AuthBean implements Serializable {
 
-    private boolean loggedIn;
+    private User.Role role;
     private String login;
     private String password;
     private String requestedPage;
@@ -22,12 +23,12 @@ public class AuthBean implements Serializable {
     @EJB
     private AuthenticationManagerBean authenticationManagerBean;
 
-    public boolean isLoggedIn() {
-        return loggedIn;
+    public User.Role getRole() {
+        return role;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public void setRole(User.Role role) {
+        this.role = role;
     }
 
     public String getLogin() {
@@ -56,13 +57,13 @@ public class AuthBean implements Serializable {
 
     public void doLogin() {
         if (StringUtils.isEmpty(login) || StringUtils.isEmpty(password)) {
-            loggedIn = false;
+            role = null;
             return;
         }
 
-        loggedIn = authenticationManagerBean.loginAsUser(login, password);
+        role = authenticationManagerBean.login(login, password);
 
-        if (loggedIn) {
+        if (role.equals(User.Role.USER)) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
             } catch (IOException e) {

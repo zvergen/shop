@@ -9,9 +9,15 @@ import javax.persistence.Table;
 @Table(name = "table_user")
 public class User {
 
+    public enum Role {
+        USER,
+        ADMIN
+    }
+
     @Id
     private long id;
     private String name;
+    private Role role;
 
     @OneToOne
     private Credentials credentials;
@@ -38,5 +44,13 @@ public class User {
 
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

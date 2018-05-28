@@ -1,7 +1,6 @@
 package ru.learndev.auth.ejb;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.learndev.auth.domain.Admin;
 import ru.learndev.auth.domain.Credentials;
 import ru.learndev.auth.domain.User;
 
@@ -17,41 +16,22 @@ public class AuthenticationManagerBean {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public boolean loginAsUser(String email, String password) {
+    public User.Role login(String email, String password) {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
-            return false;
+            return null;
         }
         Credentials credentials = entityManager.find(Credentials.class, email);
         if (credentials == null) {
-            return false;
+            return null;
         }
         if (!password.equals(credentials.getPassword())) {
-            return false;
+            return null;
         }
         User user = credentials.getUser();
         if (user == null) {
-            return false;
+            return null;
         }
 
-        return true;
-    }
-
-    public boolean loginAsAdmin(String email, String password) {
-        if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
-            return false;
-        }
-        Credentials credentials = entityManager.find(Credentials.class, email);
-        if (credentials == null) {
-            return false;
-        }
-        if (!password.equals(credentials.getPassword())) {
-            return false;
-        }
-        Admin admin = credentials.getAdmin();
-        if (admin == null) {
-            return false;
-        }
-
-        return true;
+        return user.getRole();
     }
 }
