@@ -1,4 +1,4 @@
-package ru.learndev.auth.domain;
+package ru.learndev.domain.auth;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

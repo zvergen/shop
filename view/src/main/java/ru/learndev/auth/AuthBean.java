@@ -1,8 +1,8 @@
 package ru.learndev.auth;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.learndev.auth.domain.User;
-import ru.learndev.auth.ejb.AuthenticationManagerBean;
+import ru.learndev.domain.auth.User;
+import ru.learndev.ejb.auth.AuthenticationManagerBean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;

@@ -1,6 +1,6 @@
 package ru.learndev.auth;
 
-import ru.learndev.auth.domain.User;
+import ru.learndev.domain.auth.User;
 
 import javax.inject.Inject;
 import javax.servlet.*;

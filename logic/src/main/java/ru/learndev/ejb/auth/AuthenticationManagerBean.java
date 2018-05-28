@@ -1,8 +1,8 @@
-package ru.learndev.auth.ejb;
+package ru.learndev.ejb.auth;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.learndev.auth.domain.Credentials;
-import ru.learndev.auth.domain.User;
+import ru.learndev.domain.auth.Credentials;
+import ru.learndev.domain.auth.User;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
